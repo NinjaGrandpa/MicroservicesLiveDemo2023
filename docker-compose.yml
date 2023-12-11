@@ -6,15 +6,34 @@ services:
     build:
       context: .
       dockerfile: MicroServices/APIs/HighScore/HighScore.API/Dockerfile
+    depends_on:
+      - highscore.db
+
 
   questions.api:
     image: ${DOCKER_REGISTRY-}questionsapi
     build:
       context: .
       dockerfile: MicroServices/APIs/Questions/Questions.API/Dockerfile
+    depends_on:
+      - questions.db
 
   quiz.api:
     image: ${DOCKER_REGISTRY-}quizapi
     build:
       context: .
       dockerfile: MicroServices/APIs/Quiz/Quiz.API/Dockerfile
+    depends_on:
+      - quiz.db
+
+  highscore.db:
+    container_name: highscoredb
+    image: mcr.microsoft.com/mssql/server:2022-latest
+
+  questions.db:
+    container_name: questionsdb
+    image: mongo:latest
+
+  quiz.db:
+    container_name: quizdb
+    image: mongo:latest
