@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  highscore.api:
+    image: ${DOCKER_REGISTRY-}highscoreapi
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/HighScore/HighScore.API/Dockerfile
+
+  questions.api:
+    image: ${DOCKER_REGISTRY-}questionsapi
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Questions/Questions.API/Dockerfile
+
+  quiz.api:
+    image: ${DOCKER_REGISTRY-}quizapi
+    build:
+      context: .
+      dockerfile: MicroServices/APIs/Quiz/Quiz.API/Dockerfile
