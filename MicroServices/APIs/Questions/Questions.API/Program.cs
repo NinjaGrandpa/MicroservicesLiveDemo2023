@@ -13,7 +13,6 @@ var app = builder.Build();
 
 // Middleware pipeline
 
-app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseFastEndpoints();

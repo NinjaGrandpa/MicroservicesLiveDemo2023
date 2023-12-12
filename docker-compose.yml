@@ -4,6 +4,7 @@ networks:
   highscore:
   quiz:
   questions:
+  gateway:
 
 services:
   highscore.api:
