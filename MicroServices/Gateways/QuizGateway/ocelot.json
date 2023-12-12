@@ -1,16 +1,52 @@
 {
   "Routes": [
     {
+      "UpstreamPathTemplate": "/quiz",
       "UpstreamHttpMethod": [ "Get", "Post" ],
-      "UpstreamPathTemplate": "/{everything}",
-      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "quiz.api",
           "Port": 8080
         }
-      ]
+      ],
+      "DownstreamPathTemplate": "/"
+    },
+    {
+      "UpstreamPathTemplate": "/questions/seed",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "questions.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/seed"
+    },
+    {
+      "UpstreamPathTemplate": "/questions",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "questions.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/"
+    },
+    {
+      "UpstreamPathTemplate": "/highscore",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "highscore.api",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/"
     }
   ],
   "GlobalConfiguration": {

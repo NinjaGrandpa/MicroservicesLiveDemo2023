@@ -5,6 +5,7 @@ networks:
   highscore:
   quiz:
   questions:
+  client:
 
 services:
 
@@ -15,6 +16,7 @@ services:
       dockerfile: MicroServices/Gateways/QuizGateway/Dockerfile
     networks:
       - gateway
+      - client
     depends_on:
       - highscore.api
       - quiz.api
@@ -98,4 +100,16 @@ services:
       - quiz
     ports:
       - "7001:27017"
+
+  # Clients
+
+  megaquiz:
+    image: ${DOCKER_REGISTRY-}megaquiz
+    build:
+      context: .
+      dockerfile: Clients/MegaQuiz/MegaQuiz/MegaQuiz/Dockerfile
+    networks:
+      - client
+    depends_on:
+    - quizgateway
 
