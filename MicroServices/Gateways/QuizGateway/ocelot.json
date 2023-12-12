@@ -1,0 +1,10 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/quiz"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl":  "http://localhost:500/"
+  }
+} 

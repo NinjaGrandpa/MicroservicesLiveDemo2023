@@ -4,7 +4,7 @@ using Ocelot.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("ocelotConfig.json")
+    .AddJsonFile("ocelot.json")
     .AddEnvironmentVariables();
 
 builder.Services.AddOcelot(builder.Configuration);
