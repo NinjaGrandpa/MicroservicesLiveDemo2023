@@ -4,7 +4,8 @@ using Quiz.DataAccess;
 
 namespace Quiz.API.Endpoints.GetAllQuizzes;
 
-public class GetAllQuizzesEndpoint(IQuizRepository quizRepository) : Endpoint<GetAllQuizzesRequest, GetAllQuizzesResponse>
+public class GetAllQuizzesEndpoint
+    (IQuizRepository quizRepository) : Endpoint<GetAllQuizzesRequest, GetAllQuizzesResponse>
 {
     public override void Configure()
     {
@@ -12,7 +13,8 @@ public class GetAllQuizzesEndpoint(IQuizRepository quizRepository) : Endpoint<Ge
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(GetAllQuizzesRequest getAllQuizzesRequest, CancellationToken cancellationToken)
+    public override async Task HandleAsync(GetAllQuizzesRequest getAllQuizzesRequest,
+        CancellationToken cancellationToken)
     {
         var allQuizzes = await quizRepository.GetAllAsync();
         var dtos = allQuizzes.Select(

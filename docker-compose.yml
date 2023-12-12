@@ -1,12 +1,30 @@
 version: '3.4'
 
 networks:
+  gateway:
   highscore:
   quiz:
   questions:
-  gateway:
 
 services:
+
+  quizgateway:
+    image: ${DOCKER_REGISTRY-}quizgateway
+    build:
+      context: .
+      dockerfile: MicroServices/Gateways/QuizGateway/Dockerfile
+    networks:
+      - gateway
+    depends_on:
+      - highscore.api
+      - quiz.api
+      - questions.api
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+  
+  # API:s
+
   highscore.api:
     image: ${DOCKER_REGISTRY-}highscoreapi
     build:
@@ -14,6 +32,7 @@ services:
       dockerfile: MicroServices/APIs/HighScore/HighScore.API/Dockerfile
     networks:
       - highscore
+      - gateway 
     depends_on:
       - highscore.db
     environment:
@@ -29,6 +48,7 @@ services:
       dockerfile: MicroServices/APIs/Questions/Questions.API/Dockerfile
     networks: 
       - questions
+      - gateway 
     depends_on:
       - questions.db
     environment:
@@ -42,11 +62,14 @@ services:
       dockerfile: MicroServices/APIs/Quiz/Quiz.API/Dockerfile
     networks:
       - quiz
+      - gateway 
     depends_on:
       - quiz.db
     environment:
       - DB_HOST=quiz.db
       - DB_DATABASE=QuizDB
+
+  # Databases
 
   highscore.db:
     container_name: highscoredb
@@ -75,3 +98,4 @@ services:
       - quiz
     ports:
       - "7001:27017"
+
